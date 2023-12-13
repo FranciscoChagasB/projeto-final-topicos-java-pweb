@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Atualizar Professor</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3 mt-3">
+        <form class="form-control" method="post" th:action="@{/instructors/update}" th:object="${instructor}">
+            <div class="mb-3 mt-3">
+                <label class="form-label">Código do Professor:</label>
+                <input type="number" name="instructorId" class="form-control" th:value="${instructor.getInstructorId()}"
+                       readonly="readonly">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="firstName" class="form-label">Primeiro Nome:</label>
+                <input id="firstName" type="text" name="firstName" class="form-control"
+                       th:value="${instructor.getFirstName()}">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="lastName" class="form-label">Último Nome:</label>
+                <input id="lastName" type="text" name="lastName" class="form-control"
+                       th:value="${instructor.getLastName()}">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="summary" class="form-label">Descrição:</label>
+                <input id="summary" type="text" name="summary" class="form-control"
+                       th:value="${instructor.getSummary()}">
+            </div>
+            <div class="mb-3 mt-3" th:each="course:${instructor.getCourses()}">
+                <input hidden name="courses" class="form-control"
+                       th:value="${instructor.courses[courseStat.index].getCourseId()}">
+            </div>
+            <div class="mb-3 mt-3" hidden>
+                <input name="user" class="form-control" th:field="${instructor.user}">
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

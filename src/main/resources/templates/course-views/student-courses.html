@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursos do Estudante</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-header">
+                Olá <span th:text="${firstName} +' '+${lastName}"></span> , Aqui estão suas matrículas :
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr class="text-center">
+                        <th>Código do Curso</th>
+                        <th>Nome do Curso</th>
+                        <th>Duração(h)</th>
+                        <th>Descrição do Curso</th>
+                        <th>Professor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-center" th:each="course:${listCourses}">
+                        <td th:text="${course.getCourseId()}"></td>
+                        <td th:text="${course.getCourseName()}"></td>
+                        <td th:text="${course.getCourseDuration()}"></td>
+                        <td th:text="${course.getCourseDescription()}"></td>
+                        <td th:text="${course.getInstructor().getFirstName()}+' '+${course.getInstructor().getLastName()}"></td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                Matricular-se em um novo curso:
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr class="text-center">
+                        <th>Código do Curso</th>
+                        <th>Nome do Curso</th>
+                        <th>Duração(h)</th>
+                        <th>Descrição do Curso</th>
+                        <th>Professor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-center" th:each="course:${otherCourses}">
+                        <td th:text="${course.getCourseId()}"></td>
+                        <td th:text="${course.getCourseName()}"></td>
+                        <td th:text="${course.getCourseDuration()}"></td>
+                        <td th:text="${course.getCourseDescription()}"></td>
+                        <td th:text="${course.getInstructor().getFirstName()}+' '+${course.getInstructor().getLastName()}"></td>
+                        <td>
+                            <a class="btn btn-info"
+                               th:href="@{/courses/enrollStudent(courseId=${course.getCourseId()})}">
+                                Confirmar Matrícula
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

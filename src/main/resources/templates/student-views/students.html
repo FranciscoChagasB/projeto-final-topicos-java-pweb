@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Estudante</title>
+</head>
+<body>
+<div layout:fragment="content1">
+  <div class="container mt-3">
+    <div class="card-header">Lista de Estudantes</div>
+    <div class="card-body">
+      <form method="get" th:action="@{index}">
+        <label>Busca</label>
+        <input type="text" name="keyword" th:value="${keyword}">
+        <button type="submit" class="btn btn-primary">Procurar</button>
+      </form>
+      <table class="table mt-3">
+        <thead>
+        <tr class="text-center">
+          <th>Código do Estudante</th>
+          <th>Primeiro Nome</th>
+          <th>Último Nome</th>
+          <th>Nível</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-center" th:each="student:${listStudents}">
+          <td th:text="${student.getStudentId()}"></td>
+          <td th:text="${student.getFirstName()}"></td>
+          <td th:text="${student.getLastName()}"></td>
+          <td th:text="${student.getLevel()}"></td>
+          <td>
+            <a onclick="return confirm('Are you sure')" class="btn btn-danger"
+               th:href="@{/students/delete(studentId=${student.getStudentId()}, keyword=${keyword})}">
+              Excluir
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

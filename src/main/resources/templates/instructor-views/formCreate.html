@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Professor</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6 offset-3 mt-3">
+        <form class="form-control" method="post" th:action="@{/instructors/save}">
+            <div class="mb-3 mt-3">
+                <label for="firstName" class="form-label">Primeiro Nome:</label>
+                <input id="firstName" type="text" name="firstName" class="form-control"
+                       th:field="${instructor.firstName}" required>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="lastName" class="form-label">Último Nome:</label>
+                <input id="lastName" type="text" name="lastName" class="form-control"
+                       th:field="${instructor.lastName}" required>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="summary" class="form-label">Descrição:</label>
+                <input id="summary" type="text" name="summary" class="form-control"
+                       th:field="${instructor.summary}" required>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="email" class="form-label">Email:</label>
+                <input id="email" type="email" name="email" class="form-control"
+                       th:field="${instructor.user.email}" required>
+                <span th:errors="${instructor.user.email}"></span>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="password" class="form-label">Senha:</label>
+                <input id="password" type="password" name="password" class="form-control"
+                       th:field="${instructor.user.password}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

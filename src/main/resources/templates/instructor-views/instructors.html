@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Professor</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container mt-3">
+        <div class="card-header">Lista de Professores</div>
+        <div class="card-body">
+            <form method="get" th:action="@{index}">
+                <label>Busca</label>
+                <input type="text" name="keyword" th:value="${keyword}">
+                <button type="submit" class="btn btn-primary">Procurar</button>
+            </form>
+            <table class="table mt-3">
+                <thead>
+                <tr class="text-center">
+                    <th>Código do Professor</th>
+                    <th>Primeiro Nome</th>
+                    <th>Último Nome</th>
+                    <th>Descrição</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-center" th:each="instructor:${listInstructors}">
+                    <td th:text="${instructor.getInstructorId()}"></td>
+                    <td th:text="${instructor.getFirstName()}"></td>
+                    <td th:text="${instructor.getLastName()}"></td>
+                    <td th:text="${instructor.getSummary()}"></td>
+                    <td>
+                        <a onclick="return confirm('Are you sure')" class="btn btn-danger"
+                           th:href="@{/instructors/delete(instructorId=${instructor.getInstructorId()}, keyword=${keyword})}">
+                            Excluir
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-info" th:href="@{/courses/instructor(instructorId=${instructor.getInstructorId()})}">
+                            Cursos
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
